@@ -55,7 +55,8 @@ for i in range(n + 1):
     elif count == 0:  # если нет такого числа
         print("Нет таких чисел")
 
-# решение через цикл while
+# решение через цикл while 
+# 1 вариант
 n = int(input("Введите число: "))
 i = 0
 while i <= n:
@@ -67,4 +68,15 @@ while i <= n:
     else:
         break
     i += 1
+
+# 2 вариант
+n = int(input("Введите число: "))
+i = 0
+num_sq = 2 ** i
+while n >= num_sq:
+    print(num_sq)
+    i+=1
+    num_sq = 2**i
+if n <= 0:
+    print('Нет таких чисел')
     
