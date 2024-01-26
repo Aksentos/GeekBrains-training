@@ -5,7 +5,7 @@
 пользоваться условной инструкцией if и циклами.'''
 
 auto_disstance = int(input("Какое расстояние проездает авто: "))
-disstance = int(input("Какое общее расстоение нужно прохать?": ))
+disstance = int(input("Какое общее расстоение нужно прохать?: "))
 res = -(-disstance // auto_disstance) # 1 вариант c унарным минусом
 res = (disstance // auto_disstance) + bool(disstance % auto_disstance) # 2 вариант с булевым значением
 print(res)
