@@ -13,7 +13,7 @@ print(list_1.count(k))
 
 # 2 способ
 counter = 0  # заводим счетчик
-for i in list_1[1:]:
+for i in list_1:
     if k == i:
         counter += 1
 print(counter)
@@ -31,7 +31,7 @@ print(list_1)
 k = 9  # к какому чилу бкдем искать ближайшее
 
 closer_element = list_1[0]
-for i in list_1:
+for i in list_1[1:]:
     # abs() возвращает неотрицательное значение числа (модуль)
     if abs(i - k) < abs(closer_element - k):
         closer_element = i
