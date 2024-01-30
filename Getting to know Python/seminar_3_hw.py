@@ -13,7 +13,7 @@ print(list_1.count(k))
 
 # 2 способ
 counter = 0  # заводим счетчик
-for i in list_1:
+for i in list_1[1:]:
     if k == i:
         counter += 1
 print(counter)
