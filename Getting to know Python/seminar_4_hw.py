@@ -82,3 +82,10 @@ max_blueberry = list()
 for i in range(len(arr)):
     max_blueberry.append(arr[i - 2] + arr[i - 1] + arr[i])
 print(max(max_blueberry))
+
+# 4 вариант черех pop() insert()
+for in list_1:
+    list_1.insert(0, list_1.pop(-1))
+    plus = list_1[0] + list_1[1] + list_1[2]
+    result = max(result, plus)
+print(result)
