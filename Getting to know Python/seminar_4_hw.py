@@ -89,3 +89,9 @@ for in list_1:
     plus = list_1[0] + list_1[1] + list_1[2]
     result = max(result, plus)
 print(result)
+
+# 5 вариант через проход списка в цикле
+max_blueberry = []
+for i in range(len(arr)):
+    max_blueberry.append(arr[(i - 1) % len(arr)] + arr[i % len(arr)] + arr[(i + 1) % len(arr)]) 
+print(max(max_blueberry))
