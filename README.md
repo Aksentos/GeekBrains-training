@@ -9,4 +9,5 @@
 * Урок 2. Циклы (for, while) (seminar_2.py, seminar_2_hw.py)
 * Урок 3. Списки и словари (seminar_3.py, seminar_3_hw.py)
 * Урок 4. Словари, множества и профилирование (seminar_4.py, seminar_4_hw.py)
-* 
+* Урок 5. Рекурсия и алгоритмы (seminar_5.py, seminar_5_hw.py)
+*
