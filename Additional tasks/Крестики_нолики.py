@@ -3,13 +3,14 @@
 """
 
 import tkinter as tk
-from buttons import *
+
 
 window = tk.Tk()  # открывает окно приложения
-window.title('Крестики vs. нолики')
+window.title("Крестики vs. нолики")
+
 
 # кнопка закрывает окно приложения
-def button_quit(frame):  
+def button_quit(frame):
     quit = tk.Button(
         master=frame,
         text="quit",
@@ -19,31 +20,37 @@ def button_quit(frame):
     )
     return quit
 
+
 # кнопка Х,О
 def button_x(frame):
-    but = tk.Button(
+    btn = tk.Button(
         master=frame,
-        text="X",
+        text=" ",
         width=10,
         height=5,
         bg="blue",
         fg="yellow",
-        command=change_button # смена кнопки (пока не работает)
+        # смена кнопки (пока не работает)
     )
-    return but
+    return btn
+
 
 # смена кнопки (пока не работает)
-def change_button(but):
-    but['text'] = 'O'
-    
+def change_button(self):
+    if self["text"] == " ":
+        self["text"] = "X"
+    elif self["text"] == "X":
+        self["text"] = "O"
+    elif self["text"] == "O":
+        self["text"] = " "
+
+
 # кнопка сброса (функции еще нет)
 def button_reset(frame):
-    reset = tk.Button(
-        master=frame, 
-        text="reset", 
-        relief=tk.RAISED, 
-        borderwidth=3)
+    reset = tk.Button(master=frame, text="reset", relief=tk.RAISED, borderwidth=3)
     return reset
+
+
 # заполнение игрового поля кнопками
 for i in range(4):
     window.columnconfigure(i, weight=1, minsize=75)
@@ -52,15 +59,16 @@ for i in range(4):
         frame_field = tk.Frame(master=window, relief=tk.RAISED, borderwidth=1)
         frame_field.grid(row=i, column=j, padx=3, pady=3)
         if i < 3:
-            button_x(frame_field).pack() # добавляем кнопки для Х О
+            btn = button_x(frame_field)  # добавляем кнопки для Х О
+            btn.configure(command=change_button(self=btn)) ## НЕ РАБОТАЕТ!!!!
+            btn.pack()
         if i == 3:
             if j == 2:
-                button_quit(frame_field).pack() # добавляем кнопку выхода из приложения
+                button_quit(frame_field).pack()  # добавляем кнопку выхода из приложения
             elif j == 1:
-                button_reset(frame_field).pack() # добавляем кнопку сброса игры
+                button_reset(frame_field).pack()  # добавляем кнопку сброса игры
             else:
-                pass # добавляем еще какую-нибудь кнопку слева снизу
-   
+                pass  # добавляем еще какую-нибудь кнопку слева снизу
 
 
 window.mainloop()  # указывает Python, что нужно запустить цикл событий Tkinter
