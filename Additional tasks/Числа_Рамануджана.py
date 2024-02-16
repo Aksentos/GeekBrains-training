@@ -19,7 +19,7 @@ while counter_num < 6:
                 counter += 1
                 if counter == 2:
                     counter_num += 1
-                    print("выше число:", number)
+                    print("Интересное число:", number)
                     break
 
     number += 1
