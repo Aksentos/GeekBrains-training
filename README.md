@@ -14,4 +14,5 @@
 * Урок 5. Рекурсия и алгоритмы (seminar_5.py, seminar_5_hw.py)
 * Урок 6. Повторение списков (seminar_6.py, seminar_6_hw.py)
 * Урок 7. Функции высшего порядка (seminar_7.py, seminar_7_hw.py)
+* Урок 8. Работа с файлами (seminar_8.py)
 * 
