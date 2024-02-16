@@ -1,15 +1,13 @@
 """
-V 1. Открыть справочник* (при работе программы)
-V 2. Сохраниить  справончик* (при работе программы)
+Что умеет справочник:
+V 1. Открыть справочник* (происходит при обращении к файлу)
+V 2. Сохраниить  справончик* (происходит при выполнении функций)
 V 3. Показть все контакты
 V 4. Создать контакт
 V 5. Найти контакт
 V 6. Изменить контакт 
 V 7. Удалить контакт
 V 8. Выход
-
-ВАЖНО!
-1) При выводе списка он сортируется по алфавиту (можно добавить чтобы сортировал и файл txt)
 """
 
 
@@ -36,6 +34,16 @@ def not_contact():
     add = input("Введите 1 если Да, 2 - если Нет →  ").lower()
     if add == "1":
         add_contact()
+
+
+# Сортировка книги по алфавиту
+def sort_book():
+    contact_list = [contact for contact in all_contacts()]
+    contact_list.sort()
+    file = open("phone_book.txt", "w", encoding="utf-8")
+    for contacts in contact_list:
+        file.write(str(contacts))
+    file.close()
 
 
 # Найти контакт
@@ -184,17 +192,13 @@ def content():
         6: "6 → Выйти из программы",
         7: ("*" * 26),
     }
-    print()
-    print("*" * 7, "Содержание", "*" * 7)
+
+    print("\n", "*" * 7, "Содержание", "*" * 7)
     print(*menu.values(), sep="\n")
     point = input("\nВведите № пункта → ")
     if point == "1":  # Показать все контакты
-        contact_list = []
-        for contact in all_contacts():
-            contact = contact.rstrip().split(",")
-            contact_list.append(" ".join(contact))
-        contact_list.sort()
-        print(*contact_list, sep="\n")  # выводим отсортированный по алфавиту справочник
+        print("\nСписок всех контактов:")
+        print(*all_contacts(), sep="")  # выводим отсортированный по алфавиту справочник
         content()
     elif point == "2":  # Создать новый контакт
         add_contact()
@@ -209,6 +213,7 @@ def content():
         delete_contact()
         content()
     elif point == "6":  # Выйти из программы
+        sort_book()  # Сортируем книгу по алфавиту перед закрытием
         exit()
     else:
         print("Ошибка ввода, выберите один из пунктов")
@@ -216,4 +221,5 @@ def content():
 
 
 # Запуск программы
-content()
+if __name__ == "__main__":
+    content()
