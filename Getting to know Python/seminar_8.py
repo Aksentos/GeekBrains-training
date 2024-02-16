@@ -1,6 +1,6 @@
 """
-V 1. Открыть справочник*
-V 2. Сохраниить  справончик*
+V 1. Открыть справочник* (при работе программы)
+V 2. Сохраниить  справончик* (при работе программы)
 V 3. Показть все контакты
 V 4. Создать контакт
 V 5. Найти контакт
@@ -9,10 +9,8 @@ V 7. Удалить контакт
 V 8. Выход
 
 ВАЖНО!
-1) убрал из кода добавление и обращение к ID, тк заменил в поисках на enumerate()
-2) При выводе списка он сортируется по алфавиту (можно добавить чтобы сортировал и файл txt)
+1) При выводе списка он сортируется по алфавиту (можно добавить чтобы сортировал и файл txt)
 """
-
 
 
 # Создать контакт
@@ -35,14 +33,15 @@ def all_contacts():
 # обработка несуществующего контакта для поиска
 def not_contact():
     print("Такого контакта нет, хотите его созадть?")
-    add = input("Да или Нет →  ").lower()
-    if add == "да":
+    add = input("Введите 1 если Да, 2 - если Нет →  ").lower()
+    if add == "1":
         add_contact()
 
 
 # Найти контакт
 def find_contact():
     book = all_contacts()
+
     flag = False
     if (
         what := input(
@@ -90,11 +89,15 @@ def change_name():
         for line, contact in enumerate(book):
             if fio in contact.lower().split(",")[0]:
                 print("id =", line, *contact.split(","), end="")
+
                 flag = True
         if flag:
             name_id = int(input("введите № id кого меняем?: "))
             new_name = input("Введите новое имя для контакта: ")
-            book[name_id] = f'{new_name},{contact.split(",")[1]},{contact.split(",")[2]}'
+            change_contact = book[name_id]
+            book[
+                name_id
+            ] = f'{new_name},{change_contact.split(",")[1]},{change_contact.split(",")[2]}'
             file = open("phone_book.txt", "w", encoding="utf-8")
             for contacts in book:
                 file.write(str(contacts))
@@ -105,13 +108,16 @@ def change_name():
     elif what == "2":
         number = input("Введите номер: ").lower()
         for line, contact in enumerate(book):
-            if number in contact.lower().split(",")[0]:
+            if number in contact.lower().split(",")[1]:
                 print("id =", line, *contact.split(","), end="")
                 flag = True
         if flag:
             name_id = int(input("введите № id кого меняем?: "))
-            number = input("Введите новое имя для контакта: ")
-            book[name_id] = f'{contact.split(",")[0]},{number},{contact.split(",")[2]}'
+            number = input("Введите новый номер телефона: ")
+            change_contact = book[name_id]
+            book[
+                name_id
+            ] = f'{change_contact.split(",")[0]},{number},{change_contact.split(",")[2]}'
             file = open("phone_book.txt", "w", encoding="utf-8")
             for contacts in book:
                 file.write(str(contacts))
@@ -122,13 +128,16 @@ def change_name():
     elif what == "3":
         comment = input("Введите комментарий: ").lower()
         for line, contact in enumerate(book):
-            if comment in contact.lower().split(",")[0]:
+            if comment in contact.lower().split(",")[2]:
                 print("id =", line, *contact.split(","), end="")
                 flag = True
         if flag:
             name_id = int(input("введите № id кого меняем?: "))
-            comment = input("Введите новое имя для контакта: ")
-            book[name_id] = f'{contact.split(",")[0]},{contact.split(",")[2]},{comment}'
+            comment = input("Введите новый комментарий для контакта: ")
+            change_contact = book[name_id]
+            book[
+                name_id
+            ] = f'{change_contact.split(",")[0]},{change_contact.split(",")[2]},{comment}'
             file = open("phone_book.txt", "w", encoding="utf-8")
             for contacts in book:
                 file.write(str(contacts))
@@ -140,15 +149,16 @@ def change_name():
         change_name()
     content()
 
+
 # Удалить контакт
 def delete_contact():
     book = all_contacts()
     flag = False
     fio = input("Кого будем удалять?: ").lower()
     for line, contact in enumerate(book):
-            if fio in contact.lower().split(",")[0]:
-                print("id =", line, *contact.split(","), end="")
-                flag = True
+        if fio in contact.lower().split(",")[0]:
+            print("id =", line, *contact.split(","), end="")
+            flag = True
     if flag:
         name_id = int(input("введите № id кого удаляем → "))
         print(f"{book.pop(name_id)} удален!")
@@ -162,6 +172,9 @@ def delete_contact():
 
 # Работа справочника
 def content():
+    with open("phone_book.txt", "a+", encoding="utf-8") as f:
+        f.close()
+
     menu = {
         1: "1 → Показать все контакты",
         2: "2 → Создать новый контакт",
@@ -174,8 +187,8 @@ def content():
     print()
     print("*" * 7, "Содержание", "*" * 7)
     print(*menu.values(), sep="\n")
-    point = int(input("\nВведите № пункта → "))   
-    if point == 1:  # Показать все контакты
+    point = input("\nВведите № пункта → ")
+    if point == "1":  # Показать все контакты
         contact_list = []
         for contact in all_contacts():
             contact = contact.rstrip().split(",")
@@ -183,20 +196,23 @@ def content():
         contact_list.sort()
         print(*contact_list, sep="\n")  # выводим отсортированный по алфавиту справочник
         content()
-    elif point == 2:  # Создать новый контакт
+    elif point == "2":  # Создать новый контакт
         add_contact()
         content()
-    elif point == 3:  # Найти контакт
+    elif point == "3":  # Найти контакт
         find_contact()
         content()
-    elif point == 4:  # Изменить контакт
+    elif point == "4":  # Изменить контакт
         change_name()
         content()
-    elif point == 5:  # Удалить контакт
+    elif point == "5":  # Удалить контакт
         delete_contact()
         content()
-    elif point == 6:  # Выйти из программы
+    elif point == "6":  # Выйти из программы
         exit()
+    else:
+        print("Ошибка ввода, выберите один из пунктов")
+        content()
 
 
 # Запуск программы
