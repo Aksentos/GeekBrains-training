@@ -53,8 +53,6 @@ def start_app():
                 # добавил проверку изменения книги
                 if not model.phone_book or model.is_book_changed():
                     break
-                # elif not model.phone_book:
-                #     break
                 else:
                     close_book = view.input_data(text.book_has_changed)
                     if close_book == '1':
