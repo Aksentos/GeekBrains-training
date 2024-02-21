@@ -1,5 +1,7 @@
 import text
-BORDER = '='
+
+BORDER = "="
+
 
 def show_main_menu() -> int:
     print("\t" + text.main_menu[0])
@@ -14,8 +16,30 @@ def show_main_menu() -> int:
         print(text.mistake_input)
 
 
-def show_message(message: str):
-    print('\n' + BORDER * len(message))
-    print(message)
-    print(BORDER * len(message) + '\n')
+def show_contacts(phone_book: dict, error_message: str):
+    if phone_book:
+        headers = text.contact_discription
+        print("\n" + BORDER * 61)
+        print(
+            f"{headers[0]:>3} {headers[1]:<12} {headers[2]:<17} {headers[3]:<12} {headers[4]:<12}"
+        )
+        print("-" * 61)
+        for u_id, contact in phone_book.items():
+            print(
+                f"{u_id:>3}. {contact[0]:<10} | {contact[1]:<15} | {contact[2]:<10} | {contact[3]:<10}"
+            )
+        print(BORDER * 61 + "\n")
+    else:
+        show_message(error_message)
 
+
+def show_message(message: str):
+    print("\n" + BORDER * len(message))
+    print(message)
+    print(BORDER * len(message) + "\n")
+
+
+def input_data(message) -> list[str] | str:
+    if isinstance(message, str):
+        return input("\n" + message)
+    return [input(mess) for mess in message]

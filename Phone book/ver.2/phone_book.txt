@@ -1,4 +1,4 @@
-Кирилл;8999-333-22-11;teacher
-Bob;+7909-888-12-12;seller
-Tom;+89111111111;friend
-Bary;999999999;in God we trust
+Alex E;8888888888;job;Saint-Petersburg
+Alex;9999-333-222-11;job;Spb
+John;44444444;trip;Samara
+Stone;89999123123;teacher;Moscow
