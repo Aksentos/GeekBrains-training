@@ -7,7 +7,7 @@ def find_contacts(message):
     search_word = view.input_data(message)
     result = model.find_contact(search_word)
     view.show_contacts(result, text.find_contact_no_result(search_word))
-    return True if result else False
+    return result if result else False
 
 
 def start_app():
@@ -29,17 +29,37 @@ def start_app():
             case 5:
                 find_contacts(text.input_serach_word)
             case 6:
-                if find_contacts(text.input_serach_word_for_edit):
+                # добавил проверку индекса для изменения контакта
+                check_box = find_contacts(text.input_serach_word_for_edit)
+                if check_box:
                     u_id = int(view.input_data(text.input_id_for_edit))
-                    edited_contact = view.input_data(text.edit_contact)
-                    name = model.edit_contact(u_id, edited_contact)
-                    view.show_message(text.edit_contact_successfully(name))
+                    if u_id in check_box.keys():
+                        edited_contact = view.input_data(text.edit_contact)
+                        name = model.edit_contact(u_id, edited_contact)
+                        view.show_message(text.edit_contact_successfully(name))
+                    else:
+                        view.show_message(text.mistake_input)
             case 7:
-                if find_contacts(text.input_serach_word_for_delete):
+                # добавил проверку индекса для удаления контакта
+                check_box = find_contacts(text.input_serach_word_for_delete)
+                if check_box:
                     u_id = int(view.input_data(text.input_id_for_delete))
-                    name = model.delete_contact(u_id)
-                    view.show_message(text.delete_contact_success(name))
-                # добавить подтверждение/проверку удаления
+                    if u_id in check_box.keys():
+                        name = model.delete_contact(u_id)
+                        view.show_message(text.delete_contact_success(name))
+                    else:
+                        view.show_message(text.mistake_input)
             case 8:
-                # добавить сравнение если книга была изменена
-                break
+                # добавил проверку изменения книги
+                if not model.phone_book or model.is_book_changed():
+                    break
+                # elif not model.phone_book:
+                #     break
+                else:
+                    close_book = view.input_data(text.book_has_changed)
+                    if close_book == '1':
+                        model.save_phone_book()
+                        view.show_message(text.phone_book_saved_successfully)
+                        break
+                    else:
+                        break

@@ -2,3 +2,5 @@ Alex E;8888888888;job;Saint-Petersburg
 Alex;9999-333-222-11;job;Spb
 John;44444444;trip;Samara
 Stone;89999123123;teacher;Moscow
+Артём;99923423442;проверка;Тамбов
+Иван;555-444-33-22;магазин;Москва

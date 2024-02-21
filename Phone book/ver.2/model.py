@@ -1,6 +1,8 @@
 phone_book = {}
+first_book = {}
 path = "Phone book/ver.2/phone_book.txt"  # Relative path!!!
 SEPARATOR = ";"
+
 
 
 def open_phone_book():
@@ -54,3 +56,15 @@ def edit_contact(u_id: int, contact_to_edit: list[str]):
 def delete_contact(u_id: int):
     global phone_book
     return phone_book.pop(u_id)[0]
+
+
+def is_book_changed():
+    global phone_book
+    
+    with open(path, "r", encoding="UTF-8") as book:
+        first_data = book.readlines()
+    for u_id, contact in enumerate(first_data, 1):
+        first_book[u_id] = contact.strip().split(SEPARATOR)
+    if first_book == phone_book:
+        return True
+    return False
